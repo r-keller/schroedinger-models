@@ -34,7 +34,7 @@ itr_reg = n/N;
 def V(x):
     vpot = np.zeros(len(x))
     for i in range(N):
-        vpot[i*(itr_reg):(i+1)*itr_reg] = [-v0 if abs(y-x[0]-i*v) < a/2 else 0 for y in x[i*itr_reg:(i+1)*itr_reg] ]
+        vpot[i*(itr_reg):(i+1)*itr_reg] = [-v0 if abs(abs(y-x[0])-i*v) < a else 0 for y in x[i*itr_reg:(i+1)*itr_reg] ]
     return vpot;
 vpot = V(x);
 
@@ -42,9 +42,9 @@ ymax = max(vpot); # known: 0
 ymin = min(vpot); # known: -v0
 xmin = x[0]; xmax = x[n];
 
-# plt.plot(x,vpot,'b', x,np.zeros(len(x)),'k--')
-# plt.axis([xmin, xmax, ymin-1, ymax+1])
-# plt.show()
+plt.plot(x,vpot,'b', x,np.zeros(len(x)),'k--')
+plt.axis([xmin, xmax, ymin-1, ymax+1])
+plt.show()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
