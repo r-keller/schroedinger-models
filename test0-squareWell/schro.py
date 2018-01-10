@@ -90,59 +90,9 @@ def square_well(n):
 	# plt.plot(x,u)
 	# plt.axis([xmin, xmax, ax_ymin, ax_ymax])
 	# plt.show()
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Function: Form Lattice Potential
-# Input:   n  - int: number of grid points * +1 * * per lattice *
-# Returns: uu - array size n: discretized Lattice potential 
-def lattice(n):
-# assume all wells of identical depth and width (hence lattice)
-	print('hi')
-
-	v0 = 550;
-	num_lattices = 12;
-	
-	a      = 1.0; # lattice constant; assuming unit [0,1]
-	origin = 0;
-	gamma  = 0# default at origin; center: gamma = 0.5;
-	loc_well = gamma*(a-origin);
-	# unit lattice: [a,b]; peak point -v0 of width [[width]] at e.g. (a+b)/2;
-	# hence separation, well_sep, = [(b-(a+b)/2)+0.05] (in this case divide by 2)
-	## well_sep = (unit_len-loc_well)
-	well_locs = [np.float(j*a) for j in range(num_lattices+1)]
-
-	xmin   = 0;
-	xmax   = num_lattices * a;
-	mesh_sz = n*num_lattices; # assuming passing a +1 i.e. 101 points
-	dx      = a/(n-1); # +1 in n for each lattice
-	width   = 0.2;
-	x    = np.linspace(xmin, xmax, n*num_lattices-(num_lattices-1))
-	uu = np.zeros(len(x));
-	for j in range(num_lattices-1):
-		if j == 0:
-			for i in range(j*(n-1),(j+1)*(n-1)+1):
-				if abs(x[i]-well_locs[j])<= width :
-					uu[i] = -v0;
-		else:
-			for i in range(j*(n-1),(j+1)*(n-1)+1):
-				if abs(x[i]-well_locs[j])< width :
-					uu[i] = -v0;
-			for i in range((j-1)*(n-1),j*(n-1)+1):
-				if abs(x[i]-well_locs[j])<= width :
-					uu[i] = -v0;
-			
-
-
-    # check to make sure equal number nonzero:
-	##print np.nonzero(uu<0)
-	return x, dx, uu;
-	# u = [-v0 if abs(y-well_locs[i%num_lattices])<= width else 0 for i,y in enumerate(x)]
-	# plt.plot(x,uu)
-	# plt.axis([xmin, xmax, ax_ymin, ax_ymax])
-	# plt.show()
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def main():
 	#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
